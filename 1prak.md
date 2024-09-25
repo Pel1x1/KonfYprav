@@ -8,7 +8,7 @@ cut -d: -f1 /etc/passwd|sort
 ```
 cat /etc/protocols|sort -k 2,2nr|head -n 5|awk '{print $2, $1}'
 ```
-- ![#2](https://github.com/user-attachments/assets/864a17f7-fffc-4134-8fcb-a640c742b487)
+- ![image](https://github.com/user-attachments/assets/fd3a038f-d655-4ef6-84f7-848078fc7a96)
 
 # Задание 3
 ```
@@ -17,7 +17,8 @@ print('+' + '-' * (len(x)+2) + '+')
 print(f'| {x} |')
 print('+' + '-' * (len(x)+2) + '+')
 ```
-![image](https://github.com/user-attachments/assets/b49131c1-2230-41d2-929b-f6ae8a9bd9be)
+- ![image](https://github.com/user-attachments/assets/1f6ee4da-5a01-4af4-b8af-b1985f8b8d37)
+
 
 
 # Задание 4
