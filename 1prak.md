@@ -2,7 +2,7 @@
 ```
 cut -d: -f1 /etc/passwd|sort
 ```
-- ![#1](![image](https://github.com/user-attachments/assets/66425319-faf9-45f6-b12b-ed5d0db16c2b))
+- ![image](https://github.com/user-attachments/assets/66425319-faf9-45f6-b12b-ed5d0db16c2b)
 
 # Задание 2
 ```
