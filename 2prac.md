@@ -125,7 +125,30 @@ solve satisfy;
 
 # Задание 6
 ```
+var float: root_version = 1.0; 
+set of float: foo_versions = {0.0, 1.0}; 
+var float: foo_version; 
+var float: left_version; 
+var float: right_version; 
+set of float: shared_versions = {0.0, 1.0}; 
+var float: shared_version; 
+set of float: target_versions = {1.0, 2.0}; 
+var float: target_version;
 
+% Ограничения
+constraint (foo_version == 1.0 -> (target_version == 2.0));
+constraint (foo_version == 1.0 -> (left_version == 1.0) /\ (right_version == 1.0));
+constraint (left_version == 1.0 -> (shared_version >= 1.0));
+constraint (right_version == 1.0 -> (shared_version < 2.0));
+
+% Установите диапазоны для переменных
+constraint foo_version in foo_versions;
+constraint left_version in 0.0..1.0;
+constraint right_version in 0.0..1.0;
+constraint shared_version in shared_versions;
+constraint target_version in target_versions;
+
+solve satisfy;
 ```
-![image](https://github.com/user-attachments/assets/9eb81f5d-3bea-4313-9bb0-877527737566)
+![image](https://github.com/user-attachments/assets/423f9588-1ed8-4950-bd4a-a9e27f9b5f89)
 
