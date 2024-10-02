@@ -1,8 +1,12 @@
 # Практическая №2.
 
-## Задание 1
+# Задание 1
 ```
-   
+-pip install matplotlib
+-pip show matplotlib
+-pip freeze
+-pip install pipdeptree
+-!pipdeptree --packages matplotlib
 ```
 
 ![image](https://github.com/user-attachments/assets/dd1951e7-f22b-41c2-9f12-7631bf4946ea)
@@ -14,20 +18,17 @@ git clone https://github.com/matplotlib/matplotlib.git
 ```
 
 
-## Задание 2
+# Задание 2
 ```
 Перейдти в директорию вашего проекта, где установлен Express
 - cd путь/к/проекту
 - npm list express
 ```
 ![image](https://github.com/user-attachments/assets/0bde7eb8-d73b-40f5-becb-cb102a982480)
-
-
 ```
 - npm view express
 ```
 ![image](https://github.com/user-attachments/assets/c97fad06-ec86-4682-bb81-123355cafba6)
-
 
 ```
 ""Как получить пакет без менеджера пакетов, прямо из репозитория?""
@@ -37,15 +38,70 @@ const express = require('./path/to/package'); // указать путь к па
 const app = express();
 ```
 
+# Задание 3
+``` Graphviz
+digraph dependencies {
+    rankdir=LR;
+    node [shape=box];
 
+    matplotlib [label="matplotlib"];
+    numpy [label="numpy"];
+    pyparsing [label="pyparsing"];
+    python_dateutil [label="python-dateutil"];
+    cycler [label="cycler"];
+    
+    express [label="express"];
+    accepts [label="accepts"];
+    array_flatten [label="array-flatten"];
+    cookie_parser [label="cookie-parser"];
+    debug [label="debug"];
+    depd [label="depd"];
+    finalhandler [label="finalhandler"];
+    media_type [label="media-type"];
+    methods [label="methods"];
+    on_finished [label="on-finished"];
+    range_parser [label="range-parser"];
+    send [label="send"];
+    serve_static [label="serve-static"];
 
-## Задание 4
+    express -> accepts;
+    express -> array_flatten;
+    express -> cookie_parser;
+    express -> debug;
+    express -> depd;
+    express -> finalhandler;
+    express -> media_type;
+    express -> methods;
+    express -> on_finished;
+    express -> range_parser;
+    express -> send;
+    express -> serve_static;
+
+    matplotlib -> numpy;
+    matplotlib -> pyparsing;
+    matplotlib -> python_dateutil;
+    matplotlib -> cycler;
+}
 ```
-скачиваем minizinc с официального сайта https://www.minizinc.org/downloads/
-```
-![image](https://github.com/user-attachments/assets/a7828407-953d-4e1b-a06e-c1308ed745a2)
+![image](https://github.com/user-attachments/assets/a111d4bf-4398-416e-9009-d29c403bbae9)
 
-## Задание 6
+
+# Задание 4
+```  minizinc
+include "globals.mzn";
+
+array[1..6] of var 0..9: digits;
+constraint all_different(digits);
+
+var int: sum_first = sum(digits[1..3]);
+var int: sum_last = sum(digits[4..6]);
+
+constraint sum_first = sum_last;
+solve minimize sum_first;
+```
+![image](https://github.com/user-attachments/assets/8ee98a9e-1105-4ff9-9536-b5391f7a711b)
+
+# Задание 6
 ```
 ```
 ![image](https://github.com/user-attachments/assets/9eb81f5d-3bea-4313-9bb0-877527737566)
