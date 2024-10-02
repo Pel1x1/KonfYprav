@@ -152,3 +152,61 @@ solve satisfy;
 ```
 ![image](https://github.com/user-attachments/assets/423f9588-1ed8-4950-bd4a-a9e27f9b5f89)
 
+# Задание 7
+Для начала установим пакеты
+``` bash
+pip install requests
+pip install flask
+pip install numpy
+pip install pandas
+pip install scikit-learn
+
+pip install subprocess
+```
+Далее код на Python
+``` python
+import subprocess
+
+def get_package_info(package_name):
+    try:
+        result = subprocess.run(['pip', 'show', package_name], capture_output=True, text=True)
+        if result.returncode != 0:
+            return {"error": f"Package '{package_name}' not found."}
+
+        info = {}
+        for line in result.stdout.splitlines():
+            if line.startswith("Name:"):
+                info["name"] = line.split(": ")[1]
+            elif line.startswith("Version:"):
+                info["version"] = line.split(": ")[1]
+            elif line.startswith("Requires:"):
+                dependencies = line.split(": ")[1].split(", ") if ": " in line else []
+                info["dependencies"] = dependencies
+        return info
+    except Exception as e:
+        return {"error": str(e)}
+
+packages = ["requests", "numpy", "matplotlib", "flask", "pandas"]
+
+for package in packages:
+    package_info = get_package_info(package)
+    
+    if "error" in package_info:
+        print(package_info["error"])
+    else:
+        print(f"Package: {package_info['name']} ({package_info['version']})")
+        print("Dependencies:")
+        
+        if package_info["dependencies"]:
+            for dep in package_info["dependencies"]:
+                print(f" - {dep}")
+        else:
+            print(" No dependencies")
+        print()
+```
+## Результат работы 
+![image](https://github.com/user-attachments/assets/dc312887-2f91-4087-b3c3-10d4e666ddec)
+
+
+
+
