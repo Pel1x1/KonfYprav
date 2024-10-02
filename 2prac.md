@@ -101,8 +101,31 @@ solve minimize sum_first;
 ```
 ![image](https://github.com/user-attachments/assets/8ee98a9e-1105-4ff9-9536-b5391f7a711b)
 
+
+# Задание 5
+``` minizinc
+set of int: MenuVersion = {100, 110, 120, 130, 150};
+set of int: DropdownVersion = {230, 220, 210, 200, 180};
+set of int: IconsVersion = {100, 200};
+
+var MenuVersion: menu;
+var DropdownVersion: dropdown;
+var IconsVersion: icons;
+
+constraint if menu >= 110 then dropdown >= 200 else dropdown = 180 endif;
+
+constraint if dropdown <= 200 /\ dropdown > 180 then icons = 200 else icons = 100 endif;
+
+solve satisfy;
+```
+![image](https://github.com/user-attachments/assets/74c11b8a-c6ce-4d87-a27c-79958a66bc3c)
+
+
+
+
 # Задание 6
 ```
+
 ```
 ![image](https://github.com/user-attachments/assets/9eb81f5d-3bea-4313-9bb0-877527737566)
 
