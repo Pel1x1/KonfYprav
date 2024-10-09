@@ -155,12 +155,7 @@ solve satisfy;
 # Задание 7
 Для начала установим пакеты
 ``` bash
-pip install requests
-pip install flask
-pip install numpy
-pip install pandas
-pip install scikit-learn
-
+pip install matplotlib
 pip install subprocess
 ```
 Далее код на Python
