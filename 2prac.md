@@ -187,6 +187,7 @@ pip install subprocess
 import subprocess
 
 def get_package_info(package_name):
+    """Получает информацию о пакете и его зависимостях с помощью pip show."""
     try:
         result = subprocess.run(['pip', 'show', package_name], capture_output=True, text=True)
         if result.returncode != 0:
@@ -205,7 +206,7 @@ def get_package_info(package_name):
         return {"error": str(e)}
 
 def print_dependencies(package_info, level=0):
-    indent = " " * (level * 4) 
+    indent = " " * (level * 4)  
     print(f"{indent}{package_info['name']} ({package_info['version']})")
     
     if package_info["dependencies"]:
@@ -214,7 +215,7 @@ def print_dependencies(package_info, level=0):
             if "error" not in dep_info:
                 print_dependencies(dep_info, level + 1)
             else:
-                print(f"{indent}    {dep}")
+                print(f"{indent}    {dep} (not found)")
 
 package_name = "matplotlib"
 package_info = get_package_info(package_name)
@@ -223,9 +224,10 @@ if "error" in package_info:
     print(package_info["error"])
 else:
     print_dependencies(package_info)
+    
 ```
 ## Результат работы 
-![image](https://github.com/user-attachments/assets/37467869-80b4-4500-94ca-d9753ceb08f8)
+![image](https://github.com/user-attachments/assets/c1e6601e-2e2d-4967-9be8-b241969cdf64)
 
 
 
