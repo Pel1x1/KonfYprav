@@ -125,32 +125,56 @@ solve satisfy;
 
 # Задание 6
 ```
-var float: root_version = 1.0; 
-set of float: foo_versions = {0.0, 1.0}; 
-var float: foo_version; 
-var float: left_version; 
-var float: right_version; 
-set of float: shared_versions = {0.0, 1.0}; 
-var float: shared_version; 
-set of float: target_versions = {1.0, 2.0}; 
-var float: target_version;
+var int: root_major = 1; 
+var int: root_minor = 0; 
+var int: root_patch = 0;
 
-% Ограничения
-constraint (foo_version == 1.0 -> (target_version == 2.0));
-constraint (foo_version == 1.0 -> (left_version == 1.0) /\ (right_version == 1.0));
-constraint (left_version == 1.0 -> (shared_version >= 1.0));
-constraint (right_version == 1.0 -> (shared_version < 2.0));
+set of int: foo_major = {0, 1}; 
+var int: foo_major_version; 
+var int: foo_minor_version = 0; 
+var int: foo_patch_version = 0;
 
-% Установите диапазоны для переменных
-constraint foo_version in foo_versions;
-constraint left_version in 0.0..1.0;
-constraint right_version in 0.0..1.0;
-constraint shared_version in shared_versions;
-constraint target_version in target_versions;
+var int: left_major = 1; 
+var int: left_minor = 0; 
+var int: left_patch = 0;
+
+var int: right_major = 1; 
+var int: right_minor = 0; 
+var int: right_patch = 0;
+
+set of int: shared_major = {0, 1}; 
+var int: shared_major_version; 
+var int: shared_minor_version = 0; 
+var int: shared_patch_version = 0;
+
+set of int: target_major = {1, 2}; 
+var int: target_major_version; 
+var int: target_minor_version = 0; 
+var int: target_patch_version = 0;
+
+constraint (foo_major_version == 1 -> (target_major_version == 2));
+constraint (foo_major_version == 1 -> (left_major == 1) /\ (right_major == 1));
+constraint (left_major == 1 -> (shared_major_version >= 1));
+constraint (right_major == 1 -> (shared_major_version < 2));
+
+constraint foo_major_version in foo_major;
+constraint left_major in {0, 1};
+constraint right_major in {0, 1};
+constraint shared_major_version in shared_major;
+constraint target_major_version in target_major;
 
 solve satisfy;
+
+output [
+    "root version: ", show(root_major), ".", show(root_minor), ".", show(root_patch), "\n",
+    "foo version: ", show(foo_major_version), ".", show(foo_minor_version), ".", show(foo_patch_version), "\n",
+    "left version: ", show(left_major), ".", show(left_minor), ".", show(left_patch), "\n",
+    "right version: ", show(right_major), ".", show(right_minor), ".", show(right_patch), "\n",
+    "shared version: ", show(shared_major_version), ".", show(shared_minor_version), ".", show(shared_patch_version), "\n",
+    "target version: ", show(target_major_version), ".", show(target_minor_version), ".", show(target_patch_version)
+];
 ```
-![image](https://github.com/user-attachments/assets/423f9588-1ed8-4950-bd4a-a9e27f9b5f89)
+![image](https://github.com/user-attachments/assets/303c2da7-0715-4250-99b6-d770783eb7cd)
 
 # Задание 7
 Для начала установим пакеты
