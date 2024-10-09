@@ -79,5 +79,5 @@ local students = [
 }
 ```
 <img src="https://github.com/user-attachments/assets/7678b991-cf86-4140-b84c-f88959008774" alt="image" size="50%" />
-![image](https://github.com/user-attachments/assets/40732681-186f-4027-a516-92dfdae0687b)
+<img src="https://github.com/user-attachments/assets/40732681-186f-4027-a516-92dfdae0687b" alt="image" size="50%" />
 
