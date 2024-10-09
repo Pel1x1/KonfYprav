@@ -78,6 +78,7 @@ local students = [
   "subject": "Конфигурационное управление"
 }
 ```
-<img src="https://github.com/user-attachments/assets/7678b991-cf86-4140-b84c-f88959008774" alt="image" size="50%" />
-<img src="https://github.com/user-attachments/assets/40732681-186f-4027-a516-92dfdae0687b" alt="image" size="50%" />
-
+<div width="200" height="200">
+<img src="https://github.com/user-attachments/assets/7678b991-cf86-4140-b84c-f88959008774" alt="image" width="50%" height="50%" />
+<img src="https://github.com/user-attachments/assets/40732681-186f-4027-a516-92dfdae0687b" alt="image" width="50%" height="50%" />
+</div>
