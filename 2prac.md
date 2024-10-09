@@ -187,7 +187,6 @@ pip install subprocess
 import subprocess
 
 def get_package_info(package_name):
-    """Получает информацию о пакете и его зависимостях с помощью pip show."""
     try:
         result = subprocess.run(['pip', 'show', package_name], capture_output=True, text=True)
         if result.returncode != 0:
