@@ -83,7 +83,8 @@ local students = [
 </div>
 <br><br>
 # Задание 2
-``` Dhall
+
+```
 let Group = List Text
 
 let Student = { age : Natural, group : Text, name : Text }
