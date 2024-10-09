@@ -172,7 +172,6 @@ def get_package_info(package_name):
         result = subprocess.run(['pip', 'show', package_name], capture_output=True, text=True)
         if result.returncode != 0:
             return {"error": f"Package '{package_name}' not found."}
-
         info = {}
         for line in result.stdout.splitlines():
             if line.startswith("Name:"):
@@ -186,26 +185,28 @@ def get_package_info(package_name):
     except Exception as e:
         return {"error": str(e)}
 
-packages = ["requests", "numpy", "matplotlib", "flask", "pandas"]
-
-for package in packages:
-    package_info = get_package_info(package)
+def print_dependencies(package_info, level=0):
+    indent = " " * (level * 4) 
+    print(f"{indent}{package_info['name']} ({package_info['version']})")
     
-    if "error" in package_info:
-        print(package_info["error"])
-    else:
-        print(f"Package: {package_info['name']} ({package_info['version']})")
-        print("Dependencies:")
-        
-        if package_info["dependencies"]:
-            for dep in package_info["dependencies"]:
-                print(f" - {dep}")
-        else:
-            print(" No dependencies")
-        print()
+    if package_info["dependencies"]:
+        for dep in package_info["dependencies"]:
+            dep_info = get_package_info(dep.strip())
+            if "error" not in dep_info:
+                print_dependencies(dep_info, level + 1)
+            else:
+                print(f"{indent}    {dep}")
+
+package_name = "matplotlib"
+package_info = get_package_info(package_name)
+
+if "error" in package_info:
+    print(package_info["error"])
+else:
+    print_dependencies(package_info)
 ```
 ## Результат работы 
-![image](https://github.com/user-attachments/assets/dc312887-2f91-4087-b3c3-10d4e666ddec)
+![image](https://github.com/user-attachments/assets/37467869-80b4-4500-94ca-d9753ceb08f8)
 
 
 
