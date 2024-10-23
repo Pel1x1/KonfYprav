@@ -1,6 +1,5 @@
 import requests
 import sys
-
 class DependencyGraph:
     def __init__(self):
         self.graph = {}
@@ -29,7 +28,7 @@ class DependencyGraph:
                 dep_name = dep.split(';')[0].strip() 
                 self.add_dependency(package_name, dep_name)
         else:
-            print(f"Package '{package_name}' not found on PyPI.")
+            print(f"Пакет '{package_name}'не найден")
 
 def main(package_name):
     dg = DependencyGraph()
@@ -38,7 +37,7 @@ def main(package_name):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: python dependency_graph.py <package_name>")
+        print("Использовать: py hw2.py <package_name>")
         sys.exit(1)
 
     main(sys.argv[1])
