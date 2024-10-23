@@ -26,8 +26,7 @@ class DependencyGraph:
             data = response.json()
             dependencies = data.get('info', {}).get('requires_dist', [])
             for dep in dependencies:
-                # Простой парсинг зависимости
-                dep_name = dep.split(';')[0].strip()  # Убираем условия
+                dep_name = dep.split(';')[0].strip() 
                 self.add_dependency(package_name, dep_name)
         else:
             print(f"Package '{package_name}' not found on PyPI.")
