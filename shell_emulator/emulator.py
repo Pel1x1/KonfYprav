@@ -68,7 +68,8 @@ class ShellEmulator:
             "pwd": self.print_working_directory,
             "cat": lambda: self.cat_file(command[4:]),
             "exit": self.master.quit,
-            "history": self.show_history
+            "history": self.show_history,
+            "touch": lambda: self.touch_file(command[6:])
         }
 
         cmd_func = command_dict.get(command.split()[0], None)
@@ -87,7 +88,8 @@ class ShellEmulator:
             "pwd": self.print_working_directory,
             "cat": lambda: self.cat_file(command[4:]),
             "exit": self.master.quit,
-            "history": self.show_history
+            "history": self.show_history,
+            "touch": lambda: self.touch_file(command[6:])
         }
 
         cmd_func = command_dict.get(command.split()[0], None)
@@ -133,6 +135,15 @@ class ShellEmulator:
         except FileNotFoundError:
             self.text_area.insert(tk.END, "Файл не найден\n")
     
+    def touch_file(self, filename):
+        try:
+            file_path = os.path.join(f"virtual_fs{self.current_path}", filename.strip())
+            with open(file_path, 'a'):
+                pass 
+            self.text_area.insert(tk.END, f"Файл '{filename}' создан.\n")
+        except Exception as e:
+            self.text_area.insert(tk.END, f"Ошибка при создании файла '{filename}': {str(e)}\n")
+
     def show_history(self):
         history_output = "\n".join(self.history) or "История пуста\n"
         self.text_area.insert(tk.END, f"История команд:\n{history_output}\n")
