@@ -1,21 +1,15 @@
 import sys
 import struct
-#py assembler.py input.asm output.bin log.txt
-#py interpreter.py output.bin result.csv
 
 def assemble(input_file, output_file, log_file):
     instructions = []
     with open(input_file, 'r') as f:
         for line in f:
-            # Удаляем комментарии и лишние пробелы
-            line = line.split(';')[0].strip()
-            if not line:  # Пропускаем пустые строки
+            parts = line.strip().split()
+            if not parts:
                 continue
-            
-            parts = line.split()
             command = parts[0]
             operands = list(map(int, parts[1:]))
-            
             if command == "LOAD_CONST":
                 instructions.append(struct.pack('>B', 0x94))  # LOAD_CONST opcode
                 instructions.append(struct.pack('>H', operands[0]))  # Constant
