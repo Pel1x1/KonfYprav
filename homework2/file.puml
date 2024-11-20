@@ -1,25 +1,24 @@
 @startuml
-digraph G {
-"Initial commit (763ab86)" [shape=box]
-"commit1 (15bb8d5)" [shape=box]
-  "Initial commit (763ab86)" -> "commit1 (15bb8d5)"
-"create file test.txt (15bb8)" [shape=ellipse]
-  "commit1 (15bb8d5)" -> "create file test.txt (15bb8)"
-"commit2 (5324bbd)" [shape=box]
-  "commit1 (15bb8d5)" -> "commit2 (5324bbd)"
-"create file test2.txt (5324b)" [shape=ellipse]
-  "commit2 (5324bbd)" -> "create file test2.txt (5324b)"
-"commit3 (cf9886d)" [shape=box]
-  "commit2 (5324bbd)" -> "commit3 (cf9886d)"
-"create file qwe.txt (cf988)" [shape=ellipse]
-  "commit3 (cf9886d)" -> "create file qwe.txt (cf988)"
-"edit file test.txt (cf988)" [shape=ellipse]
-  "commit3 (cf9886d)" -> "edit file test.txt (cf988)"
-"commit4 (2299184)" [shape=box]
-  "commit3 (cf9886d)" -> "commit4 (2299184)"
-"edit file qwe.txt (22991)" [shape=ellipse]
-  "commit4 (2299184)" -> "edit file qwe.txt (22991)"
-"remove file test2.txt (22991)" [shape=ellipse]
-  "commit4 (2299184)" -> "remove file test2.txt (22991)"
+!define RECTANGLE class
+package "Commits" {
+    RECTANGLE "Initial commit" as 763ab86{
+        + 763ab86414f001d11383f969e2ac1622ae630d8a
+    }
+    RECTANGLE "commit1" as 15bb8d5{
+        + 15bb8d5eb138d2a03e08f065da959ea1319de79f
+    }
+    763ab86 --> 15bb8d5
+    RECTANGLE "commit2" as 5324bbd{
+        + 5324bbde5207691ca36861ca78a2a206e1ccaab2
+    }
+    15bb8d5 --> 5324bbd
+    RECTANGLE "commit3" as cf9886d{
+        + cf9886d615d0801e99f1c27c77e7db0c77c0bb67
+    }
+    5324bbd --> cf9886d
+    RECTANGLE "commit4" as 2299184{
+        + 2299184ef2b5c9fdf63c4c14af5c48e8ca083bb4
+    }
+    cf9886d --> 2299184
 }
 @enduml
