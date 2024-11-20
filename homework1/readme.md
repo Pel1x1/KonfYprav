@@ -10,7 +10,9 @@ cd <директория проекта>
 # 2. Установка зависимостей при запуске
 
 ```
-pip install subprocess
+pip install tkinter
+pip install tarfile
+pip install argparse
 
 ```
 
