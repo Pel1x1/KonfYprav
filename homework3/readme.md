@@ -1,12 +1,4 @@
-
-# Описание
-
-Этот проект представляет собой инструмент командной строки для перобразования текста из 
-входного формата (учебный конфигурационный язык) в выходной (JSON)
-
 # Установка
-
-Для начала, убедитесь, что у вас установлен Python. Затем выполните следующие шаги:
 1. Установка программы и переход в директорию
    ```bash
    git clone <URL репозитория>
@@ -18,133 +10,57 @@
    source venv/bin/activate  # Для Linux/Mac
    venv\Scripts\activate     # Для Windows
    ```
-3. Установите необходимые зависимости (pytest для тестов, lark для работы программы):
+3. Установите необходимые зависимости :
    ```bash
-   pip install pytest
-   pip install lark
+   Зависимости не требуются
    ```
 
 # Запуск скрипта
 
-Скрипт принимает текст конфигурационного файла через стандартный ввод и выводит JSON в стандартный вывод.
+Скрипт принимает текст конфигурационного файла через стандартный ввод и выводит xml в стандартный вывод.
 
-Также можно запустить скрипт с вводом данных напрямую через консоль:
 ```bash
-python script.py
+echo 'входные данные' | py hw3.py
 ```
-После этого вы можете ввести конфигурацию вручную. Для завершения ввода нажмите ```Ctrl+D``` (Linux/macOS) или ```Ctrl+Z``` (Windows).
-# Примеры входных и выходных данных
 
 ### Пример 1
-**Входные данные:**
 ```
-|| Настройка конфигурации сервера:
-DEFAULTPORT <- 8080
-{
-PORT : .DEFAULTPORT.,
-CONNECTION : 100
-}
+#стандартный ввод
+#echo '$[ name : "Ivan", age : 30, address : "Moscow" ]' | py hw3.py
 ```
-**Выходные данные (JSON):**
-```json
-{
-    {
-        "constaint": {
-            "DEFAULTPORT": 8080
-        }
-    }
-    {
-        "PORT": 8080,
-        "CONNECTION": 100
-    }
-}
-```
-
+![image](https://github.com/user-attachments/assets/e30e96d0-f374-416e-9c17-5b1e5210b529)
 
 ### Пример 2
-**Входные данные:**
 ```
---[[ Конфигурация игровых персонажей
-например человека и гоблина
-]]
+# ввод с +1 полем
+#echo '$[ name : "Kostya", age : 19, address : "Russia", sport: "Football" ]' | py hw3.py
+```
+![image](https://github.com/user-attachments/assets/b285891c-de60-4584-ab97-90c06061f998)
 
-{
-PEOPLE : {
-		HEALTH : 100,
-		ATTACK : 10
-	},
-GOBLIN : {
-		HEALTH : 110,
-		ATTACK : 12
-	}
-}
-```
-**Выходные данные (JSON):**
-```json
-{
-    {
-        "PEOPLE": {
-            "HEALTH": 100,
-            "ATTACK": 10
-        },
-        "GOBLIN": {
-            "HEALTH": 110,
-            "ATTACK": 12
-        }
-    }
-}
-```
 
 ### Пример 3
-**Входные данные:**
 ```
-|| Конфигурация характеристик автомобилей:
+# ввод с комментрарием
+#echo '/*\nЭто пример конфигурации пользователя\nСодержит информацию о пользователе и его предпочтениях\n*/$[name : "Alex", age : 25, city : "Novosibirsk" ]' | py hw3.py
+```
+![image](https://github.com/user-attachments/assets/0a2daca8-30b1-4959-af38-b78c92fe3a12)
 
-CARS <- 3
-SPEED <- 270
+### Пример 4
+```
+# ввод с ошибкой в синтаксисе
+#echo '$[ age : 80, address : "Italia",  : "Mia", food: "Pizza" ]' | py hw3.py  
+```
+![image](https://github.com/user-attachments/assets/5202a6a9-5c62-4923-843e-a60dfc365818)
 
-{
-COUNTCAR : .CARS.,
-TOYOTA : {
-		MAXSPEED : .SPEED.,
-		PASSENGERS : 4
-	},
-LADA : {
-		MAXSPEED : 570, || на 3 скорости
-		PASSENGERS : 12
-	},
-BUGATTI : {
-		MAXSPEED : 550,
-		PASSENGERS : 2
-	}
-}
+
+### Пример 5
 ```
-**Выходные данные (JSON):**
-```json
-{
-    {
-        "constaint": {
-            "CARS": 3,
-            "SPEED": 270
-        }
-    }
-    {
-        "COUNTCAR": 3,
-        "TOYOTA": {
-            "MAXSPEED": 270,
-            "PASSENGERS": 4
-        },
-        "LADA": {
-            "MAXSPEED": 570,
-            "PASSENGERS": 12
-        },
-        "BUGATTI": {
-            "MAXSPEED": 550,
-            "PASSENGERS": 2
-        }
-    }
-}
+# ввод с ошибкой в кодировке
+#echo '$[ name : "Ванёк", age : 31, address : "МСК" ]' | py hw3.py 
 ```
+# ввод с ошибкой в кодировке
+#echo '$[ name : "Ванёк", age : 31, address : "МСК" ]' | py hw3.py 
+
 
 # Тесты
 
@@ -156,8 +72,8 @@ BUGATTI : {
    
 2. Для запуска тестирования необходимо запустить следующий скрипт:
    ```shell
-   pytest -v
+   py unittests.py
    ```
 
 ## Прохождение тестов:
-![Screenshot 2024-10-30 175021](https://github.com/user-attachments/assets/7f8db6da-ae91-4cff-b98c-543946eca93b)
+![image](https://github.com/user-attachments/assets/785fcee7-2ab0-4fb0-84cd-f32518086fd0)
