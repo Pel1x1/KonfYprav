@@ -1,0 +1,15 @@
+Instruction 0: 94
+Instruction 1: 0014
+Instruction 2: 0000
+Instruction 3: 97
+Instruction 4: 000a
+Instruction 5: 0000
+Instruction 6: 94
+Instruction 7: 0005
+Instruction 8: 0000
+Instruction 9: 07
+Instruction 10: 000a
+Instruction 11: 0000
+Instruction 12: 34
+Instruction 13: 0000
+Instruction 14: 0000
