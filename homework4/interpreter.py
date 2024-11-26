@@ -1,42 +1,60 @@
-import sys
 import struct
 import csv
+import sys
 
-def interpret(binary_file, result_file):
-    stack = []
-    memory = [0] * 256  # Пример памяти размером 256 байт
+def read_bin_file(bin_file):
+    """Читает бинарный файл и извлекает инструкции"""
+    with open(bin_file, 'rb') as f:
+        content = f.read()
+    return content
+
+def execute_instruction(instruction):
+    """Выполняет инструкцию на основе данных"""
+    opcode = instruction[0]
+    vector = instruction[1:-4]  # Все, кроме первых и последних 4 байтов
+    number_bytes = bytes(instruction[-4:])  # Преобразуем последние 4 элемента в bytes
     
-    with open(binary_file, 'rb') as f:
-        while True:
-            byte = f.read(1)
-            if not byte:
-                break
-            
-            opcode = struct.unpack('>B', byte)[0]
-            
-            if opcode == 0x94:  # LOAD_CONST
-                const_value = struct.unpack('>H', f.read(2))[0]
-                stack.append(const_value)
-            elif opcode == 0x07:  # READ_MEM
-                offset = struct.unpack('>H', f.read(2))[0]
-                address = stack.pop() + offset
-                stack.append(memory[address])
-            elif opcode == 0x97:  # WRITE_MEM
-                offset = struct.unpack('>H', f.read(2))[0]
-                value_to_write = stack.pop()
-                address = stack.pop() + offset
-                memory[address] = value_to_write
-            elif opcode == 0x34:  # XOR
-                value1 = stack.pop()
-                value2 = stack.pop()
-                stack.append(value1 ^ value2)
+    # Декодируем число
+    number = struct.unpack('I', number_bytes)[0]  # Распаковываем байты в целое число
+    
+    if opcode == 0x01:  # XOR
+        return [x ^ number for x in vector]
+    elif opcode == 0x02:  # OR
+        return [x | number for x in vector]
+    return vector
 
-    with open(result_file, 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        for i in range(len(memory)):
-            writer.writerow([i, memory[i]])
+def interpreter(bin_file, result_file, memory_range):
+    """Интерпретирует бинарный файл и записывает результат в CSV"""
+    content = read_bin_file(bin_file)
+    
+    instructions = []
+    i = 0
+    vector_length = 7  # вектор длины 7 или меньше
+    while i < len(content):
+        opcode = content[i]
+        vector = list(content[i+1:i+1+vector_length])  # Преобразуем байты в список чисел
+        number = content[i+1+vector_length:i+5+vector_length]
+        
+        instructions.append([opcode] + vector + list(number))  # Преобразуем число в список
+        i += 5 + vector_length  # Переходим к следующей инструкции
+    
+    # Запуск интерпретации
+    results = []
+    for instruction in instructions:
+        result_vector = execute_instruction(instruction)
+        results.append(result_vector)
+    
+    # Запись результатов в CSV
+    with open(result_file, 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerows(results)
 
 if __name__ == "__main__":
-    binary_file = sys.argv[1]
+    if len(sys.argv) != 3:
+        print("Использование: py interpreter.py <output.bin> <result.csv>")
+        sys.exit(1)
+    
+    bin_file = sys.argv[1]
     result_file = sys.argv[2]
-    interpret(binary_file, result_file)
+    
+    interpreter(bin_file, result_file, memory_range=None)
