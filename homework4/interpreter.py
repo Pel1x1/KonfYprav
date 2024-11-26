@@ -3,19 +3,19 @@ import csv
 import sys
 
 def read_bin_file(bin_file):
-    """Читает бинарный файл и извлекает инструкции"""
+    #Читает бинарный файл и извлекает инструкции
     with open(bin_file, 'rb') as f:
         content = f.read()
     return content
 
 def execute_instruction(instruction):
-    """Выполняет инструкцию на основе данных"""
+    #Выполняет инструкцию на основе данных
     opcode = instruction[0]
-    vector = instruction[1:-4]  # Все, кроме первых и последних 4 байтов
+    vector = instruction[1:-4]
     number_bytes = bytes(instruction[-4:])  # Преобразуем последние 4 элемента в bytes
     
     # Декодируем число
-    number = struct.unpack('I', number_bytes)[0]  # Распаковываем байты в целое число
+    number = struct.unpack('I', number_bytes)[0]
     
     if opcode == 0x01:  # XOR
         return [x ^ number for x in vector]
@@ -24,7 +24,7 @@ def execute_instruction(instruction):
     return vector
 
 def interpreter(bin_file, result_file, memory_range):
-    """Интерпретирует бинарный файл и записывает результат в CSV"""
+    #Интерпретирует бинарный файл и записывает результат в CSV
     content = read_bin_file(bin_file)
     
     instructions = []
