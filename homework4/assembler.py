@@ -28,10 +28,12 @@ def write_bin_file(instructions, output_file):
             f.write(bytearray(instruction))
 
 def write_log(instructions, log_file):
-    #Записывает лог
+    # Записывает лог
     with open(log_file, 'w') as f:
         for i, (operation, vector, number) in enumerate(instructions):
-            f.write(f'{i}={operation} {vector} {number}\n')
+            f.write(f'A = {number}\n')
+            f.write(f'Vector = {vector}\n')
+            f.write(f'Operation = {operation}\n\n')
 
 def assembler(asm_file, bin_file, log_file):
     #Главная функция
