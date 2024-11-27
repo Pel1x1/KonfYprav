@@ -29,7 +29,7 @@ def interpreter(bin_file, result_file, memory_range):
     
     instructions = []
     i = 0
-    vector_length = 7  # вектор длины 7 или меньше
+    vector_length = 9  # вектор длины 9 или меньше
     while i < len(content):
         opcode = content[i]
         vector = list(content[i+1:i+1+vector_length])  # Преобразуем байты в список чисел
